@@ -1,9 +1,12 @@
+import 'package:ecommerce_app_huma_volve/core/di/dependency_injection.dart';
 import 'package:flutter/material.dart';
 
-import 'core/theme.dart';
+import 'core/themes/theme.dart';
 import 'features/splash/screens/splash_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  setUpGitIt();
   runApp(const MyApp());
 }
 
@@ -16,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'E-Commerce App',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const SplashScreen(),
+      home: const SplashScreen(), 
     );
   }
 }

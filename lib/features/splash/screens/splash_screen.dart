@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme.dart';
-import '../../auth/login/screens/login_screen.dart';
+import '../../../core/themes/theme.dart';
+import '../../auth/presentation/views/login/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -70,3 +70,4 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
+
