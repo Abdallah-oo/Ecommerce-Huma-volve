@@ -1,12 +1,13 @@
+import 'package:ecommerce_app_huma_volve/core/widgets/app_network_image.dart';
+import 'package:ecommerce_app_huma_volve/features/home/data/models/product_model/product_model.dart';
 import 'package:flutter/material.dart';
-import '../../../core/dummy_data.dart';
 import '../../../core/themes/theme.dart';
 import '../widgets/color_selector.dart';
 import '../widgets/size_selector.dart';
 import '../../../core/widgets/primary_button.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  final Product product;
+  final ProductModel product;
 
   const ProductDetailsScreen({super.key, required this.product});
 
@@ -21,8 +22,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    _selectedColor = widget.product.colors.first;
-    _selectedSize = widget.product.sizes.first;
+    _selectedColor = Colors.black;
+    _selectedSize = "L";
   }
 
   @override
@@ -63,10 +64,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             flexibleSpace: FlexibleSpaceBar(
               background: Hero(
                 tag: 'product-${widget.product.id}',
-                child: Image.network(
-                  widget.product.imageUrl,
-                  fit: BoxFit.cover,
-                ),
+                child: AppNetworkImage(widget.product.images?.first ?? '', fit: BoxFit.cover)
               ),
             ),
           ),
@@ -88,7 +86,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       children: [
                         Expanded(
                           child: Text(
-                            widget.product.name,
+                            widget.product.title??'Product Title',
                             style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                               fontSize: 28,
                               height: 1.2,
@@ -97,7 +95,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ),
                         const SizedBox(width: 16),
                         Text(
-                          '\$${widget.product.price.toStringAsFixed(2)}',
+                          '\$${widget.product.price?.toStringAsFixed(2)}',
                           style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                             color: AppTheme.primary,
                             fontSize: 24,
@@ -114,7 +112,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      widget.product.description,
+                      widget.product.description??'Product description goes here. This is a placeholder for the product description.',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         height: 1.6,
                         fontSize: 16,
@@ -129,7 +127,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ),
                     const SizedBox(height: 12),
                     ColorSelector(
-                      colors: widget.product.colors,
+                      colors: [Colors.white, Colors.black, Colors.grey],
                       selectedColor: _selectedColor,
                       onColorSelected: (color) {
                         setState(() {
@@ -146,7 +144,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ),
                     const SizedBox(height: 12),
                     SizeSelector(
-                      sizes: widget.product.sizes,
+                      sizes: ['40', '41', '42', '43'],
                       selectedSize: _selectedSize,
                       onSizeSelected: (size) {
                         setState(() {
@@ -160,7 +158,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       onPressed: () {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('${widget.product.name} added to cart'),
+                            content: Text('${widget.product.title??'Product'} added to cart'),
                             behavior: SnackBarBehavior.floating,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),

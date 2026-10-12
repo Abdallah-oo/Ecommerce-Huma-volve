@@ -9,9 +9,13 @@ class ApiService {
   //CRUDE METHODS
 
   ///get
-  Future<dynamic> get(String endpoint) async {
+  Future<dynamic> get({required String endpoint, Map<String, dynamic>? queryParameters}) async {
     try {
-      final response = await dioClient.dio.get(endpoint);
+      final response = await dioClient.dio.get(
+        endpoint,
+        queryParameters: queryParameters,
+        options: Options(validateStatus: (status) => status != null && status < 500),
+      );
       return response;
     } on DioException catch (e) {
       throw DioExceptions.handleError(e);
