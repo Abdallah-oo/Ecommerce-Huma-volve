@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app_huma_volve/core/network/dio_client.dart';
-import 'package:ecommerce_app_huma_volve/core/network/dio_exceptions.dart';
 
 class ApiService {
   final DioClient dioClient;
@@ -10,46 +9,30 @@ class ApiService {
 
   ///get
   Future<dynamic> get({required String endpoint, Map<String, dynamic>? queryParameters}) async {
-    try {
-      final response = await dioClient.dio.get(
-        endpoint,
-        queryParameters: queryParameters,
-        options: Options(validateStatus: (status) => status != null && status < 500),
-      );
-      return response;
-    } on DioException catch (e) {
-      throw DioExceptions.handleError(e);
-    }
+    final response = await dioClient.dio.get(
+      endpoint,
+      queryParameters: queryParameters,
+      options: Options(validateStatus: (status) => status != null && status < 500),
+    );
+    return response;
   }
 
   ///post
   Future<dynamic> post(String endpoint, dynamic body) async {
-    try {
-      final response = await dioClient.dio.post(endpoint, data: body);
+    final response = await dioClient.dio.post(endpoint, data: body);
 
-      return response;
-    } on DioException catch (e) {
-      throw DioExceptions.handleError(e);
-    }
+    return response;
   }
 
   //put
   Future<dynamic> put(String endpoint, Map<String, dynamic> body) async {
-    try {
-      final response = await dioClient.dio.put(endpoint, data: body);
-      return response;
-    } on DioException catch (e) {
-      throw DioExceptions.handleError(e);
-    }
+    final response = await dioClient.dio.put(endpoint, data: body);
+    return response;
   }
 
   ///delete
   Future<dynamic> delete(String endpoint, Map<String, dynamic> body, {dynamic params}) async {
-    try {
-      final response = await dioClient.dio.delete(endpoint, data: body, queryParameters: params);
-      return response;
-    } on DioException catch (e) {
-      throw DioExceptions.handleError(e);
-    }
+    final response = await dioClient.dio.delete(endpoint, data: body, queryParameters: params);
+    return response;
   }
 }

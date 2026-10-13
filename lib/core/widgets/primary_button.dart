@@ -1,21 +1,14 @@
+import 'package:ecommerce_app_huma_volve/core/themes/theme.dart';
 import 'package:flutter/material.dart';
 
-import '../themes/theme.dart';
-
 class PrimaryButton extends StatelessWidget {
+  const PrimaryButton({super.key, required this.text, required this.onPressed, this.isLoading = false});
   final String text;
   final VoidCallback onPressed;
-  bool isLoading;
-  PrimaryButton({
-    super.key,
-    required this.text,
-    required this.onPressed,
-    this.isLoading = false,
-  });
-
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return  Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
@@ -39,9 +32,7 @@ class PrimaryButton extends StatelessWidget {
           foregroundColor: Colors.white,
           shadowColor: Colors.transparent,
           padding: const EdgeInsets.symmetric(vertical: 18),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           minimumSize: const Size(double.infinity, 56),
         ),
         child: isLoading
