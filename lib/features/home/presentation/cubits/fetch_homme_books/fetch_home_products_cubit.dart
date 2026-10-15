@@ -16,6 +16,12 @@ class FetchHomeProductsCubit extends Cubit<FetchHomeProductsState> {
   bool _hasReachedMax = false;
   bool _isFetching = false;
 
+
+  void filterProducts(List<ProductModel> products,) {
+    emit(FetchHomeProductsSuccess(products: products, hasReachedMax: _hasReachedMax));
+    // Implementation for filtering products by category
+  }
+
   /// أول تحميل (أو Refresh)
   Future<void> fetchHomeProducts() async {
     _products.clear();
@@ -62,4 +68,5 @@ class FetchHomeProductsCubit extends Cubit<FetchHomeProductsState> {
     emit(FetchHomeProductsLoadingMore(products: List.unmodifiable(_products)));
     await _fetchPage();
   }
+  List<ProductModel> get products => List.unmodifiable(_products);
 }
