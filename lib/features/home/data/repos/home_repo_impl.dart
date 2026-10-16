@@ -29,4 +29,23 @@ class HomeRepoImpl implements HomeRepo {
       return Left(ApiError(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<ApiError, ProductModel>> getProductById({required String id}) async {
+    try {
+      final response = await apiService.get(
+        endpoint: ApiEndpoints.products,
+        queryParameters: {'id': id},
+      );
+      return Right(ProductModel.fromJson(response.data[0]));
+    } on DioException catch (e) {
+        print(
+        'DIO TYPE: ${e.type} | MSG: ${e.message} | ERR: ${e.error} | URL: ${e.requestOptions.uri}',
+      );
+
+      return left(DioExceptions.handleError(e));
+    } catch (e) {
+      return Left(ApiError(message: e.toString()));
+    }
+  }
 }
