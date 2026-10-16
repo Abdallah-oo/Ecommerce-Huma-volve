@@ -4,4 +4,5 @@ import 'package:ecommerce_app_huma_volve/features/home/data/models/product_model
 
 abstract interface class HomeRepo {
   Future<Either<ApiError, List<ProductModel>>> fetchHomeProducts({required int offset});
+  Future<Either<ApiError, ProductModel>> getProductById({required String id});
 }

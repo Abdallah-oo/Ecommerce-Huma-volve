@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.example.ecommerce_app_huma_volve",
+      "sha256_cert_fingerprints": [
+        "3F:EF:B7:71:41:C5:7E:28:EF:61:FF:7F:F3:E0:8D:9E:A8:F8:91:EF:7A:57:76:1B:EB:23:B1:59:CA:5B:BD:96"
+        
+      ]
+    }
+  }
+]
